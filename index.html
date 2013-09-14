@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<head>
+	<meta name="description" content="Simply calculate your running pace." />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link href="./css/custom.css" rel="stylesheet" />
+
+	
+
+	<title>Pacer. Simple.</title>
+</head>
+<body>
+
+
+	<div class="container">
+
+	<h1>Calculate your run time.</h1>
+
+	<h2>Move the sliders to begin.</h2>
+
+		<form onchange="paceValue.value=secondsToMS(pace.value);distValue.value=(distance.value/1000).toFixed(2);" onclick="paceValue.value=secondsToMS(pace.value);distValue.value=(distance.value/1000).toFixed(2);" oninput="time.value=secondsToHMS(pace.value*distance.value/1000)">
+		
+		<label>Pace:</label>
+	  	<div>
+			<input type="range" id="pace" name="pace" min="120" max="720" step="1" />
+			<div class="result">
+				<output name="paceValue" for="pace"><span class="placeholder">--:--</span></output> min/km
+			</div>
+		</div>
+
+		<label>Distance:</label>
+		<div>
+			<input type="range" id="distance" name="distance" min="1000" max="42195" step="1" />
+			<div class="result">
+				<output name="distValue" for="distance"><span class="placeholder">--.--</span></output> kilometers
+			</div>
+		</div>
+		<div>
+			<label>Your time: </label><output name="time" for="pace distance"><span class="placeholder">(move the sliders)</span></output>
+		</div>
+
+		</form>
+
+
+		<p><br/>Note: Currently works best in Chrome. This is just a first draft, will eventually make it better and compatible with more browsers.</p>
+		
+
+
+	</div>
+	<script src="./js/jquery-1.10.2.min.js"></script>
+	<!-- http://css-tricks.com/value-bubbles-for-range-inputs/ -->
+	<script>
+	 $(function() {
+	   var el;
+	   $("input[type='range']").change(function() {
+	     el = $(this);
+	     el
+	       .next("output")
+	       .text(el.val());
+	   })
+	   .trigger('change');
+	 });
+	</script>
+	<script>
+	function secondsToHMS(seconds) {
+
+		var numhours = Math.floor((seconds % 86400) / 3600);
+		var numminutes = Math.floor(((seconds % 86400) % 3600) / 60);
+		var numseconds = ((seconds % 86400) % 3600) % 60;
+
+		return numhours + "h : " + numminutes + "m : " + Math.round(numseconds) + "s";
+
+	};
+	function secondsToMS(seconds) {
+		var numminutes = Math.floor(((seconds % 86400) % 3600) / 60);
+		var numseconds = ((seconds % 86400) % 3600) % 60;
+
+		return numminutes + ":" + Math.round(numseconds);
+
+	};
+	</script>
+</body>
+</html>
