@@ -19,49 +19,35 @@
 
 	<h2>Move the sliders to begin.</h2>
 
-		<form onchange="paceValue.value=secondsToMS(pace.value);distValue.value=(distance.value/1000).toFixed(2);" onclick="paceValue.value=secondsToMS(pace.value);distValue.value=(distance.value/1000).toFixed(2);" oninput="time.value=secondsToHMS(pace.value*distance.value/1000)">
+		<form oninput="calculateTime(pace.value, distance.value)">
 		
 		<label>Pace:</label>
 	  	<div>
-			<input type="range" id="pace" name="pace" min="120" max="720" step="1" />
-			<div class="result">
-				<output name="paceValue" for="pace"><span class="placeholder">--:--</span></output> min/km
+			<div id="slider1">
+				<input type="range" id="pace" name="pace" min="120" max="720" step="1" value="360" onchange="updateSlider(this.value, this.id)" />
+				<div class="result" id="pace-value">6.00</div> min/km
 			</div>
 		</div>
 
 		<label>Distance:</label>
 		<div>
-			<input type="range" id="distance" name="distance" min="1000" max="42195" step="1" />
-			<div class="result">
-				<output name="distValue" for="distance"><span class="placeholder">--.--</span></output> kilometers
+			<div id="slider2">
+				<input type="range" id="distance" name="distance" min="1000" max="42195" value="10000" step="1" onchange="updateSlider(this.value, this.id)" />
+				<div class="result" id="distance-value">10.00</div> kilometers
 			</div>
 		</div>
 		<div>
-			<label>Your time: </label><output name="time" for="pace distance"><span class="placeholder">(move the sliders)</span></output>
+			<label>Your time: </label><span id="time-value">1h : 0m : 0s</span>
 		</div>
 
 		</form>
 
-
-		<p><br/>Note: Currently works best in Chrome. This is just a first draft, will eventually make it better and compatible with more browsers.</p>
+		<p>Note: Currently the Pacer works best in Safari and Chrome.</p>
 		
-
 
 	</div>
 	<script src="./js/jquery-1.10.2.min.js"></script>
-	<!-- http://css-tricks.com/value-bubbles-for-range-inputs/ -->
-	<script>
-	 $(function() {
-	   var el;
-	   $("input[type='range']").change(function() {
-	     el = $(this);
-	     el
-	       .next("output")
-	       .text(el.val());
-	   })
-	   .trigger('change');
-	 });
-	</script>
+
 	<script>
 	function secondsToHMS(seconds) {
 
@@ -79,6 +65,24 @@
 		return numminutes + ":" + Math.round(numseconds);
 
 	};
+
+	function updateSlider(slideAmount, id) {
+	if (id == "pace") {
+		var pace = document.getElementById("pace-value");
+		pace.innerHTML=secondsToMS(slideAmount);		
+	}
+	else if (id == "distance") {
+		var distance = document.getElementById("distance-value");
+		distance.innerHTML=(slideAmount/1000).toFixed(2);
+	}
+
+	};
+
+	function calculateTime(pace, distance) {
+		var time = document.getElementById("time-value");
+		time.innerHTML=secondsToHMS(pace*distance/1000);
+	};
+
 	</script>
 </body>
 </html>

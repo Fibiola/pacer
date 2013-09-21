@@ -42,6 +42,7 @@ label {
 }
 
 .result {
+  margin-top: 1em;
   display: inline-block;
 }
 
