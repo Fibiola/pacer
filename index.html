@@ -19,6 +19,8 @@
 
 	<h2>Move the sliders to begin.</h2>
 
+		<noscript><span style="color:red;"><strong>Ooops! The Pacer currently requires JavaScript. Please enable it under your browser's settings.</strong></noscript>
+
 		<form oninput="calculateTime(pace.value, distance.value)">
 		
 		<label>Pace:</label>
@@ -32,17 +34,26 @@
 		<label>Distance:</label>
 		<div>
 			<div id="slider2">
-				<input type="range" id="distance" name="distance" min="1000" max="42195" value="10000" step="1" onchange="updateSlider(this.value, this.id)" />
+				<input type="range" id="distance" name="distance" min="1000" max="42194.988" value="10000" step="1" onchange="updateSlider(this.value, this.id)" />
 				<div class="result" id="distance-value">10.00</div> kilometers
 			</div>
+			<div id="distances">
+				Or pick a race distance: 
+				<button type="button" id="km-5" value="5000" onclick="changeDistance(this.value)">5 K</button>	
+				<button type="button" id="km-10" value="10000" onclick="changeDistance(this.value)">10 K</button>			
+				<button type="button" id="km-15" value="15000" onclick="changeDistance(this.value)">15 K</button>
+				<button type="button" id="km-16" value="16093.4" onclick="changeDistance(this.value)">10 miles</button>
+				<button type="button" id="km-21" value="21097.494" onclick="changeDistance(this.value)">Half marathon</button>
+				<button type="button" id="km-42" value="42194.988" onclick="changeDistance(this.value)">Marathon</button>
+			</div>
 		</div>
-		<div>
+		<h3>
 			<label>Your time: </label><span id="time-value">1h : 0m : 0s</span>
-		</div>
+		</h3>
 
 		</form>
 
-		<p>Note: Currently the Pacer works best in Safari and Chrome.</p>
+		<div class="footnote">Note: Currently the Pacer works best in Safari and Chrome.</div>
 		
 
 	</div>
@@ -83,6 +94,12 @@
 		time.innerHTML=secondsToHMS(pace*distance/1000);
 	};
 
+	function changeDistance(nvalue) {
+		distance.value=nvalue;
+		updateSlider(nvalue, 'distance');
+		calculateTime(pace.value,nvalue);
+	};
+	
 	</script>
 </body>
 </html>
