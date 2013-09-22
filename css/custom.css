@@ -92,13 +92,10 @@ input[type="range"]::-webkit-slider-thumb{
   h2 {
     font-size: 1em;
     }
-
-
   }
 
 @media (max-width: 480px) {
   h1 {
     font-size: 2em;
     }
-
   }

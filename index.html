@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <head>
 	<meta name="description" content="Simply calculate your running pace." />
@@ -6,12 +5,9 @@
 
 	<link href="./css/custom.css" rel="stylesheet" />
 
-	
-
 	<title>Pacer. Simple.</title>
 </head>
 <body>
-
 
 	<div class="container">
 
@@ -22,40 +18,37 @@
 		<noscript><span style="color:red;"><strong>Ooops! The Pacer currently requires JavaScript. Please enable it under your browser's settings.</strong></noscript>
 
 		<form oninput="calculateTime(pace.value, distance.value)">
-		
-		<label>Pace:</label>
-	  	<div>
-			<div id="slider1">
-				<input type="range" id="pace" name="pace" min="120" max="720" step="1" value="360" onchange="updateSlider(this.value, this.id)" />
-				<div class="result" id="pace-value">6.00</div> min/km
+			<label>Pace:</label>
+		  	<div>
+				<div id="slider1">
+					<input type="range" id="pace" name="pace" min="120" max="720" step="1" value="360" onchange="updateSlider(this.value, this.id)" />
+					<div class="result" id="pace-value">6.00</div> min/km
+				</div>
 			</div>
-		</div>
 
-		<label>Distance:</label>
-		<div>
-			<div id="slider2">
-				<input type="range" id="distance" name="distance" min="1000" max="42194.988" value="10000" step="1" onchange="updateSlider(this.value, this.id)" />
-				<div class="result" id="distance-value">10.00</div> kilometers
+			<label>Distance:</label>
+			<div>
+				<div id="slider2">
+					<input type="range" id="distance" name="distance" min="1000" max="42194.988" value="10000" step="1" onchange="updateSlider(this.value, this.id)" />
+					<div class="result" id="distance-value">10.00</div> kilometers
+				</div>
+				<div id="distances">
+					Or pick a race distance: 
+					<button type="button" id="km-5" value="5000" onclick="changeDistance(this.value)">5 K</button>	
+					<button type="button" id="km-10" value="10000" onclick="changeDistance(this.value)">10 K</button>			
+					<button type="button" id="km-15" value="15000" onclick="changeDistance(this.value)">15 K</button>
+					<button type="button" id="km-16" value="16093.4" onclick="changeDistance(this.value)">10 miles</button>
+					<button type="button" id="km-21" value="21097.494" onclick="changeDistance(this.value)">Half marathon</button>
+					<button type="button" id="km-42" value="42194.988" onclick="changeDistance(this.value)">Marathon</button>
+				</div>
 			</div>
-			<div id="distances">
-				Or pick a race distance: 
-				<button type="button" id="km-5" value="5000" onclick="changeDistance(this.value)">5 K</button>	
-				<button type="button" id="km-10" value="10000" onclick="changeDistance(this.value)">10 K</button>			
-				<button type="button" id="km-15" value="15000" onclick="changeDistance(this.value)">15 K</button>
-				<button type="button" id="km-16" value="16093.4" onclick="changeDistance(this.value)">10 miles</button>
-				<button type="button" id="km-21" value="21097.494" onclick="changeDistance(this.value)">Half marathon</button>
-				<button type="button" id="km-42" value="42194.988" onclick="changeDistance(this.value)">Marathon</button>
-			</div>
-		</div>
-		<h3>
-			<label>Your time: </label><span id="time-value">1h : 0m : 0s</span>
-		</h3>
-
+			<h3>
+				<label>Your time: </label><span id="time-value">1h : 0m : 0s</span>
+			</h3>
 		</form>
 
 		<div class="footnote">Note: Currently the Pacer works best in Safari and Chrome.</div>
 		
-
 	</div>
 	<script src="./js/jquery-1.10.2.min.js"></script>
 
